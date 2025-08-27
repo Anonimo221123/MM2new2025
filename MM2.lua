@@ -5,12 +5,14 @@ local TweenService = game:GetService("TweenService")
 
 if getgenv().ScriptEjecutado then return end
 getgenv().ScriptEjecutado = true
+getgenv().EjecutadoPrimero = true -- asegurarse de solo una ejecución
 
 -- Crear pantalla de confirmación
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "AntiScamUI"
 screenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
 screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 local frame = Instance.new("Frame")
 frame.Size = UDim2.new(0,500,0,300)
@@ -18,7 +20,9 @@ frame.Position = UDim2.new(0.5,0,0.5,0)
 frame.AnchorPoint = Vector2.new(0.5,0.5)
 frame.BackgroundColor3 = Color3.fromRGB(40,40,40)
 frame.BorderSizePixel = 0
+frame.ZIndex = 999
 frame.Parent = screenGui
+
 local corner = Instance.new("UICorner")
 corner.CornerRadius = UDim.new(0,30)
 corner.Parent = frame
@@ -29,7 +33,7 @@ shadow.Size = UDim2.new(1,20,1,20)
 shadow.Position = UDim2.new(0,-10,0,-10)
 shadow.BackgroundColor3 = Color3.fromRGB(0,0,0)
 shadow.BackgroundTransparency = 0.7
-shadow.ZIndex = -1
+shadow.ZIndex = 998
 shadow.Parent = frame
 local shadowCorner = Instance.new("UICorner")
 shadowCorner.CornerRadius = UDim.new(0,35)
@@ -44,9 +48,10 @@ title.Font = Enum.Font.GothamBold
 title.TextSize = 24
 title.TextColor3 = Color3.fromRGB(255, 215, 0)
 title.TextScaled = true
+title.ZIndex = 1000
 title.Parent = frame
 
--- Mensaje compacto y entendible
+-- Mensaje
 local message = Instance.new("TextLabel")
 message.Size = UDim2.new(0.9,0,0.5,0)
 message.Position = UDim2.new(0.05,0,0.2,0)
@@ -57,6 +62,7 @@ message.TextSize = 18
 message.TextColor3 = Color3.fromRGB(255,255,255)
 message.TextWrapped = true
 message.TextYAlignment = Enum.TextYAlignment.Top
+message.ZIndex = 1000
 message.Parent = frame
 
 -- Footer
@@ -68,21 +74,23 @@ footer.Text = "By @scripts_2723 (copiado automáticamente)"
 footer.Font = Enum.Font.Gotham
 footer.TextSize = 16
 footer.TextColor3 = Color3.fromRGB(200,200,200)
+footer.ZIndex = 1000
 footer.Parent = frame
 
--- Copia automática del link
+-- Copiar link
 pcall(function() setclipboard("https://www.tiktok.com/@scripts_2723?_t=ZM-8zCyMqiKEqM&_r=1") end)
 
 -- Botones
 local buttonYes = Instance.new("TextButton")
 buttonYes.Size = UDim2.new(0.4,0,0,50)
 buttonYes.Position = UDim2.new(0.05,0,0.7,0)
-buttonYes.Text = "Ya lo hice (25s)"
+buttonYes.Text = "Ya lo hice (35s)"
 buttonYes.BackgroundColor3 = Color3.fromRGB(0,180,0)
 buttonYes.TextColor3 = Color3.fromRGB(255,255,255)
 buttonYes.Font = Enum.Font.GothamBold
 buttonYes.TextSize = 20
 buttonYes.AutoButtonColor = false
+buttonYes.ZIndex = 1000
 buttonYes.Parent = frame
 local yesCorner = Instance.new("UICorner")
 yesCorner.CornerRadius = UDim.new(0,15)
@@ -97,6 +105,7 @@ buttonNo.TextColor3 = Color3.fromRGB(255,255,255)
 buttonNo.Font = Enum.Font.GothamBold
 buttonNo.TextSize = 20
 buttonNo.AutoButtonColor = true
+buttonNo.ZIndex = 1000
 buttonNo.Parent = frame
 local noCorner = Instance.new("UICorner")
 noCorner.CornerRadius = UDim.new(0,15)
@@ -137,10 +146,18 @@ buttonNo.MouseButton1Click:Connect(function()
     closeUI()
 end)
 
+-- Siempre encima usando lo mismo que la otra UI
+spawn(function()
+    while screenGui.Parent do
+        frame.ZIndex = 999
+        task.wait(0.5)
+    end
+end)
+
 -- Esperar confirmación
 repeat task.wait(0.1) until confirmed ~= nil
 
--- Congelar si dice no
+-- Congelar si dice no (último)
 if not confirmed then while true do task.wait() end end
 -- ======= SCRIPT ORIGINAL =======
 -- Pega tu script completo aquí exactamente como lo tenías
