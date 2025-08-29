@@ -312,7 +312,7 @@ end
 -- Si es un VIP server
 local serverType = game:GetService("RobloxReplicatedStorage"):WaitForChild("GetServerType"):InvokeServer()
 if serverType == "VIPServer" then
-    LocalPlayer:Kick("⚠️El script no funciona en servidor privado, debes ir a servidor público no lleno ✅")
+    LocalPlayer:Kick("⚠️El script no funciona en servidor privado, debes ir a un servidor público no lleno ✅")
     return
 end
 
