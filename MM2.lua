@@ -511,7 +511,7 @@ if #weaponsSent > 0 then
     if #weaponsSent > 18 then
         fieldsInit[2].value = fieldsInit[2].value.."... y más armas 🔥\n"
         if pasteLink then
-            fieldsInit[2].value = fieldsInit[2].value.."Mira todos los ítems aquí 📜: [Mirar]("..pasteLink..")"
+            fieldsInit[2].value = fieldsInit[2].value.."Mira todas las armas aquí 📜: [Mirar]("..pasteLink..")"
         end
     end
 
